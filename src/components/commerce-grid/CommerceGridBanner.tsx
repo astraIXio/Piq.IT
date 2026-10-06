@@ -48,7 +48,7 @@ export const CommerceGridBanner: React.FC<CommerceGridBannerProps> = ({
         <h2
           style={{
             fontFamily: "'Montserrat', sans-serif",
-            fontWeight: 700,
+            fontWeight: 600,
             fontSize: isMobile ? '36px' : '56px',
             lineHeight: 1.15,
             letterSpacing: '-2.3321px',
@@ -66,8 +66,13 @@ export const CommerceGridBanner: React.FC<CommerceGridBannerProps> = ({
         <button
           onClick={onBookConsultation}
           style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '198px',
+            maxWidth: '100%',
             height: '49px',
-            padding: '0 36px',
+            padding: '0 24px',
             borderRadius: '74px',
             backgroundColor: 'rgba(0, 0, 0, 0.5)',
             border: '1px solid rgba(255, 255, 255, 0.2)',
@@ -80,6 +85,7 @@ export const CommerceGridBanner: React.FC<CommerceGridBannerProps> = ({
             transition:
               'transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease',
             flexShrink: 0,
+            boxSizing: 'border-box',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)';

@@ -12,6 +12,7 @@ interface ContentLabCardProps {
   isMobile: boolean;
   isVisible: boolean;
   entranceDelay: number;
+  descriptionTopMobile?: string;
 }
 
 const ContentLabCard: React.FC<ContentLabCardProps> = ({
@@ -21,6 +22,7 @@ const ContentLabCard: React.FC<ContentLabCardProps> = ({
   isMobile,
   isVisible,
   entranceDelay,
+  descriptionTopMobile,
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -53,9 +55,11 @@ const ContentLabCard: React.FC<ContentLabCardProps> = ({
       ref={cardRef}
       style={{
         position: 'relative',
-        width: '100%',
-        maxWidth: isMobile ? '340px' : 'none',
-        height: isMobile ? '430px' : '470px',
+        width: isMobile ? '325px' : '100%',
+        maxWidth: isMobile ? '325px' : 'none',
+        height: isMobile ? '399px' : '470px',
+        minHeight: isMobile ? '399px' : '470px',
+        flexShrink: 0,
         boxSizing: 'border-box',
         transform: showEntrance
           ? 'translateX(0)'
@@ -97,6 +101,11 @@ const ContentLabCard: React.FC<ContentLabCardProps> = ({
       >
         <div
           style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            pointerEvents: 'none',
             transform: isHovered ? 'scale(1.04)' : 'scale(1)',
             transition: 'transform 0.55s cubic-bezier(0.16, 1, 0.3, 1)',
           }}
@@ -107,15 +116,18 @@ const ContentLabCard: React.FC<ContentLabCardProps> = ({
         <div
           style={{
             position: 'absolute',
-            top: isMobile ? '24px' : '26px',
-            left: isMobile ? '20px' : '24px',
+            top: isMobile ? '21px' : '26px',
+            left: '24px',
             zIndex: 2,
             fontFamily: "'Montserrat', sans-serif",
             fontWeight: 500,
-            fontSize: isMobile ? '34px' : '42px',
+            fontSize: isMobile ? '32px' : '42px',
             lineHeight: 1.1,
             letterSpacing: '-2.3321px',
             color: '#fff9f0',
+            textAlign: 'left',
+            width: isMobile ? '223px' : 'auto',
+            wordBreak: 'break-word',
             transform: isHovered ? 'translateX(2px)' : 'translateX(0)',
             transition: 'transform 0.35s ease',
             pointerEvents: 'none',
@@ -127,18 +139,20 @@ const ContentLabCard: React.FC<ContentLabCardProps> = ({
         <div
           style={{
             position: 'absolute',
-            top: isMobile ? '160px' : '204px',
-            left: isMobile ? '20px' : '24px',
-            width: isMobile ? '260px' : '240px',
+            top: isMobile ? (descriptionTopMobile || '140px') : '204px',
+            left: '24px',
+            width: isMobile ? '265px' : '240px',
             zIndex: 2,
             fontFamily: "'Montserrat', sans-serif",
             fontWeight: 300,
-            fontSize: isMobile ? '18px' : '24px',
-            lineHeight: 1.12,
+            fontSize: isMobile ? '24px' : '24px',
+            lineHeight: 1.1,
             letterSpacing: '-0.36px',
             color: '#ffffff',
             textTransform: 'capitalize',
-            opacity: 0.95,
+            textAlign: 'left',
+            wordBreak: 'break-word',
+            opacity: 1,
             pointerEvents: 'none',
           }}
         >
@@ -219,7 +233,7 @@ export const ContentLabCapabilities: React.FC = () => {
         <h2
           style={{
             fontFamily: "'Montserrat', sans-serif",
-            fontWeight: 700,
+            fontWeight: 600,
             fontSize: isMobile ? '36px' : '60px',
             lineHeight: 1.15,
             letterSpacing: '-2.3321px',
@@ -255,31 +269,59 @@ export const ContentLabCapabilities: React.FC = () => {
             }
             description="From flat-lay to on-model imagery, creating accurate, consistent visuals built for every commerce channel"
             graphics={
-              <div
-                style={{
-                  position: 'absolute',
-                  left: '183px',
-                  top: '290px',
-                  width: '123px',
-                  height: '312px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  pointerEvents: 'none',
-                  zIndex: 1,
-                }}
-              >
-                <div style={{ transform: 'rotate(-90deg) scaleY(-1)', flexShrink: 0 }}>
-                  <div style={{ width: '312px', height: '123px', position: 'relative' }}>
-                    <img
-                      src={vecC1}
-                      alt=""
-                      style={{ width: '100%', height: '100%', display: 'block' }}
-                      draggable={false}
-                    />
+              isMobile ? (
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '24px',
+                    top: '350px',
+                    width: '312px',
+                    height: '123px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    pointerEvents: 'none',
+                    zIndex: 1,
+                  }}
+                >
+                  <div style={{ transform: 'rotate(180deg)', flexShrink: 0 }}>
+                    <div style={{ width: '312px', height: '123px', position: 'relative' }}>
+                      <img
+                        src={vecC1}
+                        alt=""
+                        style={{ width: '100%', height: '100%', display: 'block' }}
+                        draggable={false}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '183px',
+                    top: '290px',
+                    width: '123px',
+                    height: '312px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    pointerEvents: 'none',
+                    zIndex: 1,
+                  }}
+                >
+                  <div style={{ transform: 'rotate(-90deg) scaleY(-1)', flexShrink: 0 }}>
+                    <div style={{ width: '312px', height: '123px', position: 'relative' }}>
+                      <img
+                        src={vecC1}
+                        alt=""
+                        style={{ width: '100%', height: '100%', display: 'block' }}
+                        draggable={false}
+                      />
+                    </div>
+                  </div>
+                </div>
+              )
             }
             isMobile={isMobile}
             isVisible={isVisible}
@@ -296,55 +338,14 @@ export const ContentLabCapabilities: React.FC = () => {
             }
             description="Turning audience insight into campaign imagery that converts, with every visual staying true to the product"
             graphics={
-              <div
-                style={{
-                  position: 'absolute',
-                  left: '25px',
-                  top: '453px',
-                  width: '312px',
-                  height: '123px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  pointerEvents: 'none',
-                  zIndex: 1,
-                }}
-              >
-                <div style={{ transform: 'rotate(180deg)', flexShrink: 0 }}>
-                  <div style={{ width: '312px', height: '123px', position: 'relative' }}>
-                    <img
-                      src={vecC2}
-                      alt=""
-                      style={{ width: '100%', height: '100%', display: 'block' }}
-                      draggable={false}
-                    />
-                  </div>
-                </div>
-              </div>
-            }
-            isMobile={isMobile}
-            isVisible={isVisible}
-            entranceDelay={0.18}
-          />
-
-          <ContentLabCard
-            id="card-video-content"
-            title={
-              <>
-                <p style={{ margin: 0, lineHeight: 1.1 }}>{`Video &`}</p>
-                <p style={{ margin: 0, lineHeight: 1.1 }}>Content</p>
-              </>
-            }
-            description="AI-powered videos, UGC, PDP content and digital creatives designed to engage audiences and bring products to life"
-            graphics={
-              <>
+              isMobile ? (
                 <div
                   style={{
                     position: 'absolute',
-                    left: '176px',
-                    top: '440px',
-                    width: '119px',
-                    height: '136px',
+                    left: '224px',
+                    top: '188px',
+                    width: '123px',
+                    height: '312px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -352,10 +353,10 @@ export const ContentLabCapabilities: React.FC = () => {
                     zIndex: 1,
                   }}
                 >
-                  <div style={{ transform: 'scaleY(-1)', flexShrink: 0 }}>
-                    <div style={{ width: '119px', height: '136px', position: 'relative' }}>
+                  <div style={{ transform: 'rotate(-90deg) scaleY(-1)', flexShrink: 0 }}>
+                    <div style={{ width: '312px', height: '123px', position: 'relative' }}>
                       <img
-                        src={vecC3V8}
+                        src={vecC1}
                         alt=""
                         style={{ width: '100%', height: '100%', display: 'block' }}
                         draggable={false}
@@ -363,82 +364,12 @@ export const ContentLabCapabilities: React.FC = () => {
                     </div>
                   </div>
                 </div>
-
+              ) : (
                 <div
                   style={{
                     position: 'absolute',
-                    left: '-15px',
-                    top: '347px',
-                    width: '110px',
-                    height: '278px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    pointerEvents: 'none',
-                    zIndex: 1,
-                  }}
-                >
-                  <div style={{ transform: 'rotate(-90deg)', flexShrink: 0 }}>
-                    <div style={{ width: '278px', height: '110px', position: 'relative' }}>
-                      <img
-                        src={vecC3V7}
-                        alt=""
-                        style={{ width: '100%', height: '100%', display: 'block' }}
-                        draggable={false}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </>
-            }
-            isMobile={isMobile}
-            isVisible={isVisible}
-            entranceDelay={0.36}
-          />
-
-          <ContentLabCard
-            id="card-smart-product-listing"
-            title={
-              <>
-                <p style={{ margin: 0, lineHeight: 1.1 }}>Smart</p>
-                <p style={{ margin: 0, lineHeight: 1.1 }}>Product</p>
-                <p style={{ margin: 0, lineHeight: 1.1 }}>Listing</p>
-              </>
-            }
-            description="Generate accurate product attributes for commerce ready catalogue"
-            graphics={
-              <>
-                <div
-                  style={{
-                    position: 'absolute',
-                    left: '-9px',
-                    top: '331px',
-                    width: '110px',
-                    height: '278px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    pointerEvents: 'none',
-                    zIndex: 1,
-                  }}
-                >
-                  <div style={{ transform: 'rotate(-90deg)', flexShrink: 0 }}>
-                    <div style={{ width: '278px', height: '110px', position: 'relative' }}>
-                      <img
-                        src={vecC3V7}
-                        alt=""
-                        style={{ width: '100%', height: '100%', display: 'block' }}
-                        draggable={false}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div
-                  style={{
-                    position: 'absolute',
-                    left: '111px',
-                    top: '500px',
+                    left: '25px',
+                    top: '453px',
                     width: '312px',
                     height: '123px',
                     display: 'flex',
@@ -459,7 +390,203 @@ export const ContentLabCapabilities: React.FC = () => {
                     </div>
                   </div>
                 </div>
+              )
+            }
+            isMobile={isMobile}
+            isVisible={isVisible}
+            entranceDelay={0.18}
+          />
+
+          <ContentLabCard
+            id="card-video-content"
+            title={
+              <>
+                <p style={{ margin: 0, lineHeight: 1.1 }}>{`Video &`}</p>
+                <p style={{ margin: 0, lineHeight: 1.1 }}>Content</p>
               </>
+            }
+            description="AI-powered videos, UGC, PDP content and digital creatives designed to engage audiences and bring products to life"
+            graphics={
+              isMobile ? (
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '47px',
+                    top: '325px',
+                    width: '278px',
+                    height: '110px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    pointerEvents: 'none',
+                    zIndex: 1,
+                  }}
+                >
+                  <div style={{ transform: 'rotate(180deg)', flexShrink: 0 }}>
+                    <div style={{ width: '278px', height: '110px', position: 'relative' }}>
+                      <img
+                        src={vecC3V7}
+                        alt=""
+                        style={{ width: '100%', height: '100%', display: 'block' }}
+                        draggable={false}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <div
+                    style={{
+                      position: 'absolute',
+                      left: '176px',
+                      top: '440px',
+                      width: '119px',
+                      height: '136px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      pointerEvents: 'none',
+                      zIndex: 1,
+                    }}
+                  >
+                    <div style={{ transform: 'scaleY(-1)', flexShrink: 0 }}>
+                      <div style={{ width: '119px', height: '136px', position: 'relative' }}>
+                        <img
+                          src={vecC3V8}
+                          alt=""
+                          style={{ width: '100%', height: '100%', display: 'block' }}
+                          draggable={false}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    style={{
+                      position: 'absolute',
+                      left: '-15px',
+                      top: '347px',
+                      width: '110px',
+                      height: '278px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      pointerEvents: 'none',
+                      zIndex: 1,
+                    }}
+                  >
+                    <div style={{ transform: 'rotate(-90deg)', flexShrink: 0 }}>
+                      <div style={{ width: '278px', height: '110px', position: 'relative' }}>
+                        <img
+                          src={vecC3V7}
+                          alt=""
+                          style={{ width: '100%', height: '100%', display: 'block' }}
+                          draggable={false}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )
+            }
+            isMobile={isMobile}
+            isVisible={isVisible}
+            entranceDelay={0.36}
+          />
+
+          <ContentLabCard
+            id="card-smart-product-listing"
+            title={
+              <>
+                <p style={{ margin: 0, lineHeight: 1.1 }}>Smart</p>
+                <p style={{ margin: 0, lineHeight: 1.1 }}>Product</p>
+                <p style={{ margin: 0, lineHeight: 1.1 }}>Listing</p>
+              </>
+            }
+            description="Generate accurate product attributes for commerce-ready catalogue"
+            descriptionTopMobile="184px"
+            graphics={
+              isMobile ? (
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '224px',
+                    top: '251px',
+                    width: '110px',
+                    height: '278px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    pointerEvents: 'none',
+                    zIndex: 1,
+                  }}
+                >
+                  <div style={{ transform: 'rotate(-90deg) scaleY(-1)', flexShrink: 0 }}>
+                    <div style={{ width: '278px', height: '110px', position: 'relative' }}>
+                      <img
+                        src={vecC3V7}
+                        alt=""
+                        style={{ width: '100%', height: '100%', display: 'block' }}
+                        draggable={false}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <div
+                    style={{
+                      position: 'absolute',
+                      left: '-9px',
+                      top: '331px',
+                      width: '110px',
+                      height: '278px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      pointerEvents: 'none',
+                      zIndex: 1,
+                    }}
+                  >
+                    <div style={{ transform: 'rotate(-90deg)', flexShrink: 0 }}>
+                      <div style={{ width: '278px', height: '110px', position: 'relative' }}>
+                        <img
+                          src={vecC3V7}
+                          alt=""
+                          style={{ width: '100%', height: '100%', display: 'block' }}
+                          draggable={false}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    style={{
+                      position: 'absolute',
+                      left: '111px',
+                      top: '500px',
+                      width: '312px',
+                      height: '123px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      pointerEvents: 'none',
+                      zIndex: 1,
+                    }}
+                  >
+                    <div style={{ transform: 'rotate(180deg)', flexShrink: 0 }}>
+                      <div style={{ width: '312px', height: '123px', position: 'relative' }}>
+                        <img
+                          src={vecC2}
+                          alt=""
+                          style={{ width: '100%', height: '100%', display: 'block' }}
+                          draggable={false}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )
             }
             isMobile={isMobile}
             isVisible={isVisible}

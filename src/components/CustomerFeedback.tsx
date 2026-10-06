@@ -28,7 +28,7 @@ const desktopCards: FeedbackCardData[] = [
     headline:
       'With Piqit, we have seen sharp improvements in sales performance, merchandising efficiency, and marketplace execution',
     highlightText:
-      'A truly reliable partner that understand both fashion and technology.',
+      'A truly reliable partner that understands both fashion and technology.',
   },
   {
     id: 'jplc',
@@ -48,7 +48,7 @@ const desktopCards: FeedbackCardData[] = [
     supportingText:
       'They take raw product shoots and quickly turn them into a steady stream of high-converting, ad-ready assets across all our digital channels.',
     highlightSecondary:
-      'A massive shoutout to the PIQIT team. They understand performance marketing, brand aesthetics, and platform specs, and working with them feels like an extension of our own team. Their speed and proactive problem-solving have been a gamechanger for keeping our campaigns on track.',
+      'A massive shoutout to the PIQIT team. They understand performance marketing, brand aesthetics, and platform specs, and working with them feels like an extension of our own team. Their speed and proactive problem-solving have been a game-changer for keeping our campaigns on track.',
   },
   {
     id: 'pvh',
@@ -81,8 +81,6 @@ export const CustomerFeedback: React.FC = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeftState, setScrollLeftState] = useState(0);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -110,23 +108,6 @@ export const CustomerFeedback: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  const updateScrollButtons = () => {
-    if (!scrollRef.current) return;
-    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-    setCanScrollLeft(scrollLeft > 10);
-    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
-  };
-
-  const handleScrollPrev = () => {
-    if (!scrollRef.current) return;
-    scrollRef.current.scrollBy({ left: -606, behavior: 'smooth' });
-  };
-
-  const handleScrollNext = () => {
-    if (!scrollRef.current) return;
-    scrollRef.current.scrollBy({ left: 606, behavior: 'smooth' });
-  };
-
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!scrollRef.current || isMobile) return;
     setIsDragging(true);
@@ -140,7 +121,6 @@ export const CustomerFeedback: React.FC = () => {
     const x = e.pageX - scrollRef.current.offsetLeft;
     const walk = (x - startX) * 1.4;
     scrollRef.current.scrollLeft = scrollLeftState - walk;
-    updateScrollButtons();
   };
 
   const handleMouseUpOrLeave = () => {
@@ -157,7 +137,6 @@ export const CustomerFeedback: React.FC = () => {
 
       if ((e.deltaY > 0 && !atEnd) || (e.deltaY < 0 && !atStart)) {
         scrollRef.current.scrollLeft += e.deltaY;
-        updateScrollButtons();
       }
     }
   };
@@ -449,7 +428,7 @@ export const CustomerFeedback: React.FC = () => {
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              objectPosition: 'center 40%',
+              objectPosition: 'center 50%',
               transform: zoomTransform,
               transition,
             }}
@@ -572,7 +551,7 @@ export const CustomerFeedback: React.FC = () => {
         background: isMobile
           ? '#fff9f0'
           : 'linear-gradient(148.214deg, rgb(255, 249, 240) 65.5%, rgb(153, 149, 144) 209%)',
-        padding: isMobile ? '57px 20px 80px 20px' : '75px 0 90px 71px',
+        padding: isMobile ? '57px 20px 80px 20px' : '65px 0 90px 71px',
         overflow: 'hidden',
         position: 'relative',
         width: '100%',
@@ -591,9 +570,13 @@ export const CustomerFeedback: React.FC = () => {
           style={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between',
-            marginBottom: isMobile ? '36px' : '36px',
-            paddingRight: isMobile ? '0' : '71px',
+            justifyContent: 'center',
+            position: 'relative',
+           
+            paddingBottom: isMobile ? '40px' : '60px',
+            marginBottom: isMobile ? '20px' : '20px',
+            width: '100%',
+            boxSizing: 'border-box',
             transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
             opacity: isVisible ? 1 : 0,
             transition:
@@ -607,8 +590,8 @@ export const CustomerFeedback: React.FC = () => {
               fontWeight: 600,
               lineHeight: 1.1,
               letterSpacing: isMobile ? '-2.33px' : '-0.9px',
-              color: isMobile ? '#000000' : '#552624',
-              textAlign: isMobile ? 'left' : 'left',
+              color: '#000000',
+              textAlign: 'center',
               margin: 0,
             }}
           >
@@ -624,81 +607,6 @@ export const CustomerFeedback: React.FC = () => {
               </>
             )}
           </h2>
-
-          {!isMobile && (
-            <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
-              <button
-                onClick={handleScrollPrev}
-                disabled={!canScrollLeft}
-                aria-label="Previous card"
-                style={{
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '50%',
-                  border: '1.5px solid #552624',
-                  backgroundColor: canScrollLeft ? '#ffffff' : 'rgba(255,255,255,0.4)',
-                  color: canScrollLeft ? '#552624' : 'rgba(85,38,36,0.3)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: canScrollLeft ? 'pointer' : 'default',
-                  transition: 'all 0.25s ease',
-                  boxShadow: canScrollLeft ? '0 4px 14px rgba(0,0,0,0.06)' : 'none',
-                }}
-                onMouseEnter={(e) => {
-                  if (canScrollLeft) {
-                    e.currentTarget.style.backgroundColor = '#552624';
-                    e.currentTarget.style.color = '#ffffff';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (canScrollLeft) {
-                    e.currentTarget.style.backgroundColor = '#ffffff';
-                    e.currentTarget.style.color = '#552624';
-                  }
-                }}
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="15 18 9 12 15 6" />
-                </svg>
-              </button>
-              <button
-                onClick={handleScrollNext}
-                disabled={!canScrollRight}
-                aria-label="Next card"
-                style={{
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '50%',
-                  border: '1.5px solid #552624',
-                  backgroundColor: canScrollRight ? '#ffffff' : 'rgba(255,255,255,0.4)',
-                  color: canScrollRight ? '#552624' : 'rgba(85,38,36,0.3)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: canScrollRight ? 'pointer' : 'default',
-                  transition: 'all 0.25s ease',
-                  boxShadow: canScrollRight ? '0 4px 14px rgba(0,0,0,0.06)' : 'none',
-                }}
-                onMouseEnter={(e) => {
-                  if (canScrollRight) {
-                    e.currentTarget.style.backgroundColor = '#552624';
-                    e.currentTarget.style.color = '#ffffff';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (canScrollRight) {
-                    e.currentTarget.style.backgroundColor = '#ffffff';
-                    e.currentTarget.style.color = '#552624';
-                  }
-                }}
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="9 18 15 12 9 6" />
-                </svg>
-              </button>
-            </div>
-          )}
         </div>
 
         {isMobile ? (
@@ -706,7 +614,7 @@ export const CustomerFeedback: React.FC = () => {
             style={{
               display: 'flex',
               flexDirection: 'column',
-              gap: '28px',
+              gap: '39px',
               width: '100%',
               alignItems: 'center',
             }}
@@ -732,23 +640,27 @@ export const CustomerFeedback: React.FC = () => {
               setHoveredCardId(null);
             }}
             onWheel={handleWheel}
-            onScroll={updateScrollButtons}
             style={{
               display: 'flex',
               flexDirection: 'row',
               gap: '36px',
               overflowX: 'auto',
               overflowY: 'visible',
-              paddingTop: '50px',
-              paddingBottom: '60px',
-              marginTop: '-25px',
-              paddingLeft: '16px',
+              paddingTop: '100px',
+              paddingBottom: '140px',
+              marginTop: '-75px',
+              marginBottom: '-80px',
+              marginLeft: '-71px',
+              paddingLeft: '87px',
               paddingRight: '120px',
+              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)',
+              maskImage: 'linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)',
               cursor: isDragging ? 'grabbing' : 'default',
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
               WebkitOverflowScrolling: 'touch',
-              width: '100%',
+              width: 'calc(100% + 71px)',
+              boxSizing: 'border-box',
               userSelect: isDragging ? 'none' : 'auto',
             }}
           >
@@ -1070,7 +982,7 @@ const MobileFeedbackCardItem: React.FC<MobileCardItemProps> = ({
         style={{
           fontFamily: "'Montserrat', sans-serif",
           fontWeight: 500,
-          fontSize: '22px',
+          fontSize: '24px',
           lineHeight: 1.15,
           letterSpacing: '-1.2px',
           color: '#000000',
@@ -1085,7 +997,7 @@ const MobileFeedbackCardItem: React.FC<MobileCardItemProps> = ({
           style={{
             fontFamily: "'Montserrat', sans-serif",
             fontWeight: 400,
-            fontSize: '14px',
+            fontSize: '16px',
             color: '#c5422b',
             lineHeight: 1.35,
             marginBottom: '20px',
@@ -1100,7 +1012,7 @@ const MobileFeedbackCardItem: React.FC<MobileCardItemProps> = ({
           style={{
             fontFamily: "'Montserrat', sans-serif",
             fontWeight: 400,
-            fontSize: '14px',
+            fontSize: '16px',
             color: '#c5422b',
             lineHeight: 1.35,
             marginBottom: '20px',
@@ -1118,7 +1030,7 @@ const MobileFeedbackCardItem: React.FC<MobileCardItemProps> = ({
               margin: '0 0 10px 0',
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 400,
-              fontSize: '14px',
+              fontSize: '16px',
               color: '#000000',
               lineHeight: 1.35,
             }}
@@ -1130,7 +1042,7 @@ const MobileFeedbackCardItem: React.FC<MobileCardItemProps> = ({
               margin: 0,
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 400,
-              fontSize: '10px',
+              fontSize: '12px',
               color: '#000000',
               lineHeight: 1.35,
             }}
@@ -1147,7 +1059,7 @@ const MobileFeedbackCardItem: React.FC<MobileCardItemProps> = ({
               margin: '0 0 12px 0',
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 400,
-              fontSize: '14px',
+              fontSize: '16px',
               color: '#000000',
               lineHeight: 1.35,
             }}
@@ -1158,7 +1070,7 @@ const MobileFeedbackCardItem: React.FC<MobileCardItemProps> = ({
             style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 400,
-              fontSize: '14px',
+              fontSize: '16px',
               color: '#000000',
               marginBottom: '2px',
             }}
@@ -1169,7 +1081,7 @@ const MobileFeedbackCardItem: React.FC<MobileCardItemProps> = ({
             style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 500,
-              fontSize: '22px',
+              fontSize: '24px',
               lineHeight: 1.15,
               letterSpacing: '-1.2px',
               color: '#000000',
@@ -1194,7 +1106,7 @@ const MobileFeedbackCardItem: React.FC<MobileCardItemProps> = ({
             style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 600,
-              fontSize: '18px',
+              fontSize: '20px',
               color: '#000000',
               lineHeight: 1.2,
             }}
@@ -1205,7 +1117,7 @@ const MobileFeedbackCardItem: React.FC<MobileCardItemProps> = ({
             style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 400,
-              fontSize: '12px',
+              fontSize: '14px',
               color: '#000000',
               marginTop: '4px',
               lineHeight: 1.25,

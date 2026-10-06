@@ -93,8 +93,10 @@ export const CommerceGridNextEcosystem: React.FC<CommerceGridNextEcosystemProps>
               alignItems: 'center',
               justifyContent: 'center',
               gap: '12px',
-              height: '49px',
-              padding: '0 32px',
+              width: '198px',
+              maxWidth: '100%',
+              height: '47px',
+              padding: '0 24px',
               borderRadius: '74px',
               background: 'linear-gradient(to right, #351514, #a83925)',
               color: '#ffffff',
@@ -105,6 +107,7 @@ export const CommerceGridNextEcosystem: React.FC<CommerceGridNextEcosystemProps>
               boxShadow: '0 10px 43.3px rgba(0, 0, 0, 0.2)',
               transition: 'transform 0.25s ease, box-shadow 0.25s ease',
               flexShrink: 0,
+              boxSizing: 'border-box',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)';

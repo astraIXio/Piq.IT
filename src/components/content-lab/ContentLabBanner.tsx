@@ -75,14 +75,15 @@ export const ContentLabBanner: React.FC<ContentLabBannerProps> = ({
         <button
           onClick={handleClick}
           style={{
-            width: isMobile ? '170px' : '231px',
-            height: isMobile ? '38px' : '49px',
+            width: '198px',
+            maxWidth: '100%',
+            height: '49px',
             borderRadius: '74px',
             backgroundColor: isMobile ? 'rgba(255, 236, 236, 0.12)' : 'rgba(0, 0, 0, 0.5)',
             border: '1px solid rgba(255, 255, 255, 0.15)',
             color: '#ffffff',
             fontFamily: "'Montserrat', sans-serif",
-            fontSize: isMobile ? '16px' : '18px',
+            fontSize: '18px',
             fontWeight: 600,
             cursor: 'pointer',
             display: 'flex',
@@ -91,6 +92,7 @@ export const ContentLabBanner: React.FC<ContentLabBannerProps> = ({
             boxShadow: '0 10px 43.3px rgba(0, 0, 0, 0.2)',
             transition: 'transform 0.25s ease, background-color 0.25s ease',
             flexShrink: 0,
+            boxSizing: 'border-box',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px)';

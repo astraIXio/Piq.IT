@@ -91,24 +91,26 @@ export const DesignStudioNextEcosystem: React.FC<DesignStudioNextEcosystemProps>
         <button
           onClick={handleExplore}
           style={{
-            minWidth: isMobile ? '156px' : '200px',
-            height: isMobile ? '40px' : '49px',
+            width: '198px',
+            maxWidth: '100%',
+            height: '47px',
             borderRadius: '50px',
             background: 'linear-gradient(to right, #c5422b, #492020)',
             border: 'none',
             color: '#ffffff',
             fontFamily: "'Montserrat', sans-serif",
-            fontSize: isMobile ? '14px' : '16px',
+            fontSize: isMobile ? '15px' : '16px',
             fontWeight: 600,
             cursor: 'pointer',
             display: 'inline-flex',
             alignItems: 'center',
             justifyContent: 'center',
             gap: '12px',
-            padding: '0 28px',
+            padding: '0 24px',
             boxShadow: '0 8px 30px rgba(197, 66, 43, 0.35)',
             transition: 'transform 0.25s ease, box-shadow 0.25s ease',
             flexShrink: 0,
+            boxSizing: 'border-box',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px)';

@@ -53,9 +53,11 @@ const CommerceGridCard: React.FC<CommerceGridCardProps> = ({
       ref={cardRef}
       style={{
         position: 'relative',
-        width: '100%',
-        maxWidth: isMobile ? '340px' : 'none',
-        height: isMobile ? '400px' : '463px',
+        width: isMobile ? '325px' : '100%',
+        maxWidth: isMobile ? '325px' : 'none',
+        height: isMobile ? '399px' : '463px',
+        minHeight: isMobile ? '399px' : '463px',
+        flexShrink: 0,
         boxSizing: 'border-box',
         transform: showEntrance
           ? 'translateX(0)'
@@ -77,7 +79,7 @@ const CommerceGridCard: React.FC<CommerceGridCardProps> = ({
           width: '100%',
           height: '100%',
           backgroundColor: '#fff9f0',
-          borderRadius: '30px',
+          borderRadius: '20px',
           boxSizing: 'border-box',
           overflow: 'hidden',
           boxShadow: isHovered
@@ -97,6 +99,11 @@ const CommerceGridCard: React.FC<CommerceGridCardProps> = ({
       >
         <div
           style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            pointerEvents: 'none',
             transform: isHovered ? 'scale(1.04)' : 'scale(1)',
             transition: 'transform 0.55s cubic-bezier(0.16, 1, 0.3, 1)',
           }}
@@ -107,15 +114,18 @@ const CommerceGridCard: React.FC<CommerceGridCardProps> = ({
         <div
           style={{
             position: 'absolute',
-            top: isMobile ? '24px' : '30px',
-            left: isMobile ? '22px' : '28px',
+            top: isMobile ? '21px' : '30px',
+            left: '24px',
             zIndex: 2,
             fontFamily: "'Montserrat', sans-serif",
-            fontWeight: 700,
-            fontSize: isMobile ? '28px' : '36px',
+            fontWeight: 500,
+            fontSize: isMobile ? '32px' : '36px',
             lineHeight: 1.1,
-            letterSpacing: '-1.5px',
+            letterSpacing: '-2.3321px',
             color: '#000000',
+            textAlign: 'left',
+            width: isMobile ? '223px' : 'auto',
+            wordBreak: 'break-word',
             transform: isHovered ? 'translateX(2px)' : 'translateX(0)',
             transition: 'transform 0.35s ease',
             pointerEvents: 'none',
@@ -127,17 +137,19 @@ const CommerceGridCard: React.FC<CommerceGridCardProps> = ({
         <div
           style={{
             position: 'absolute',
-            top: isMobile ? '135px' : '158px',
-            left: isMobile ? '22px' : '28px',
-            width: isMobile ? '260px' : '230px',
+            top: isMobile ? '140px' : '158px',
+            left: '24px',
+            width: isMobile ? '265px' : '230px',
             zIndex: 2,
             fontFamily: "'Montserrat', sans-serif",
-            fontWeight: 400,
-            fontSize: isMobile ? '16px' : '18px',
-            lineHeight: 1.25,
+            fontWeight: 300,
+            fontSize: isMobile ? '24px' : '18px',
+            lineHeight: 1.1,
             letterSpacing: '-0.36px',
             color: '#000000',
-            opacity: 0.95,
+            textAlign: 'left',
+            wordBreak: 'break-word',
+            opacity: 1,
             pointerEvents: 'none',
           }}
         >
@@ -255,31 +267,59 @@ export const CommerceGridCapabilities: React.FC = () => {
             }
             description="Amazon, Myntra, Nykaa, Tata CLiQ, AJIO and your own website, connected through one inventory and order flow"
             graphics={
-              <div
-                style={{
-                  position: 'absolute',
-                  left: '0px',
-                  top: '354px',
-                  width: '278px',
-                  height: '109px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  pointerEvents: 'none',
-                  zIndex: 1,
-                }}
-              >
-                <div style={{ transform: 'scaleY(-1)', flexShrink: 0 }}>
-                  <div style={{ width: '278px', height: '109px', position: 'relative' }}>
-                    <img
-                      src={vecC1}
-                      alt=""
-                      style={{ width: '100%', height: '100%', display: 'block' }}
-                      draggable={false}
-                    />
+              isMobile ? (
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '219px',
+                    top: '141px',
+                    width: '109px',
+                    height: '278px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    pointerEvents: 'none',
+                    zIndex: 1,
+                  }}
+                >
+                  <div style={{ transform: 'rotate(-90deg) scaleY(-1)', flexShrink: 0 }}>
+                    <div style={{ width: '278px', height: '109px', position: 'relative' }}>
+                      <img
+                        src={vecC1}
+                        alt=""
+                        style={{ width: '100%', height: '100%', display: 'block' }}
+                        draggable={false}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '0px',
+                    top: '354px',
+                    width: '278px',
+                    height: '109px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    pointerEvents: 'none',
+                    zIndex: 1,
+                  }}
+                >
+                  <div style={{ transform: 'scaleY(-1)', flexShrink: 0 }}>
+                    <div style={{ width: '278px', height: '109px', position: 'relative' }}>
+                      <img
+                        src={vecC1}
+                        alt=""
+                        style={{ width: '100%', height: '100%', display: 'block' }}
+                        draggable={false}
+                      />
+                    </div>
+                  </div>
+                </div>
+              )
             }
             isMobile={isMobile}
             isVisible={isVisible}
@@ -296,31 +336,59 @@ export const CommerceGridCapabilities: React.FC = () => {
             }
             description="We build your online store, set up repeat-purchase flows and handle fulfilment, all planned around your margins"
             graphics={
-              <div
-                style={{
-                  position: 'absolute',
-                  left: '90px',
-                  top: '394px',
-                  width: '204px',
-                  height: '80px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  pointerEvents: 'none',
-                  zIndex: 1,
-                }}
-              >
-                <div style={{ transform: 'rotate(180deg)', flexShrink: 0 }}>
-                  <div style={{ width: '204px', height: '80px', position: 'relative' }}>
-                    <img
-                      src={vecC2}
-                      alt=""
-                      style={{ width: '100%', height: '100%', display: 'block' }}
-                      draggable={false}
-                    />
+              isMobile ? (
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '107px',
+                    top: '297px',
+                    width: '247px',
+                    height: '97px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    pointerEvents: 'none',
+                    zIndex: 1,
+                  }}
+                >
+                  <div style={{ transform: 'rotate(180deg)', flexShrink: 0 }}>
+                    <div style={{ width: '247px', height: '97px', position: 'relative' }}>
+                      <img
+                        src={vecC2}
+                        alt=""
+                        style={{ width: '100%', height: '100%', display: 'block' }}
+                        draggable={false}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '90px',
+                    top: '394px',
+                    width: '204px',
+                    height: '80px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    pointerEvents: 'none',
+                    zIndex: 1,
+                  }}
+                >
+                  <div style={{ transform: 'rotate(180deg)', flexShrink: 0 }}>
+                    <div style={{ width: '204px', height: '80px', position: 'relative' }}>
+                      <img
+                        src={vecC2}
+                        alt=""
+                        style={{ width: '100%', height: '100%', display: 'block' }}
+                        draggable={false}
+                      />
+                    </div>
+                  </div>
+                </div>
+              )
             }
             isMobile={isMobile}
             isVisible={isVisible}
@@ -337,31 +405,59 @@ export const CommerceGridCapabilities: React.FC = () => {
             }
             description="Launch and manage your brand website with storefront, inventory, orders and fulfilment built around your business"
             graphics={
-              <div
-                style={{
-                  position: 'absolute',
-                  left: '183px',
-                  top: '341px',
-                  width: '122px',
-                  height: '139px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  pointerEvents: 'none',
-                  zIndex: 1,
-                }}
-              >
-                <div style={{ transform: 'scaleY(-1)', flexShrink: 0 }}>
-                  <div style={{ width: '122px', height: '139px', position: 'relative' }}>
-                    <img
-                      src={vecC3}
-                      alt=""
-                      style={{ width: '100%', height: '100%', display: 'block' }}
-                      draggable={false}
-                    />
+              isMobile ? (
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '220px',
+                    top: '293px',
+                    width: '122px',
+                    height: '139px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    pointerEvents: 'none',
+                    zIndex: 1,
+                  }}
+                >
+                  <div style={{ transform: 'scaleY(-1)', flexShrink: 0 }}>
+                    <div style={{ width: '122px', height: '139px', position: 'relative' }}>
+                      <img
+                        src={vecC3}
+                        alt=""
+                        style={{ width: '100%', height: '100%', display: 'block' }}
+                        draggable={false}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '183px',
+                    top: '341px',
+                    width: '122px',
+                    height: '139px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    pointerEvents: 'none',
+                    zIndex: 1,
+                  }}
+                >
+                  <div style={{ transform: 'scaleY(-1)', flexShrink: 0 }}>
+                    <div style={{ width: '122px', height: '139px', position: 'relative' }}>
+                      <img
+                        src={vecC3}
+                        alt=""
+                        style={{ width: '100%', height: '100%', display: 'block' }}
+                        draggable={false}
+                      />
+                    </div>
+                  </div>
+                </div>
+              )
             }
             isMobile={isMobile}
             isVisible={isVisible}
@@ -378,31 +474,59 @@ export const CommerceGridCapabilities: React.FC = () => {
             }
             description="Connect stores, warehouses and dark stores to fulfil online and offline orders through one commerce network"
             graphics={
-              <div
-                style={{
-                  position: 'absolute',
-                  left: '65px',
-                  top: '357px',
-                  width: '270px',
-                  height: '106px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  pointerEvents: 'none',
-                  zIndex: 1,
-                }}
-              >
-                <div style={{ transform: 'rotate(180deg)', flexShrink: 0 }}>
-                  <div style={{ width: '270px', height: '106px', position: 'relative' }}>
-                    <img
-                      src={vecC4}
-                      alt=""
-                      style={{ width: '100%', height: '100%', display: 'block' }}
-                      draggable={false}
-                    />
+              isMobile ? (
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '-33px',
+                    top: '280px',
+                    width: '390px',
+                    height: '153px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    pointerEvents: 'none',
+                    zIndex: 1,
+                  }}
+                >
+                  <div style={{ transform: 'rotate(180deg)', flexShrink: 0 }}>
+                    <div style={{ width: '390px', height: '153px', position: 'relative' }}>
+                      <img
+                        src={vecC4}
+                        alt=""
+                        style={{ width: '100%', height: '100%', display: 'block' }}
+                        draggable={false}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '65px',
+                    top: '357px',
+                    width: '270px',
+                    height: '106px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    pointerEvents: 'none',
+                    zIndex: 1,
+                  }}
+                >
+                  <div style={{ transform: 'rotate(180deg)', flexShrink: 0 }}>
+                    <div style={{ width: '270px', height: '106px', position: 'relative' }}>
+                      <img
+                        src={vecC4}
+                        alt=""
+                        style={{ width: '100%', height: '100%', display: 'block' }}
+                        draggable={false}
+                      />
+                    </div>
+                  </div>
+                </div>
+              )
             }
             isMobile={isMobile}
             isVisible={isVisible}

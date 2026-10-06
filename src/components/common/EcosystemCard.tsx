@@ -49,12 +49,17 @@ export const EcosystemCard: React.FC<EcosystemCardProps> = ({
     { isHovered }
   );
 
-  const cardWidth = isMobile ? '100%' : width;
-  const cardHeight = isMobile ? '539px' : height;
+  const cardWidth = isMobile ? '311px' : width;
+  const cardHeight = isMobile ? '430px' : height;
 
   const handleCardClick = () => {
     if (isMobile) {
-      toggleCard();
+      if (exploreUrl && exploreUrl !== '#') {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        window.location.hash = exploreUrl.replace(/^#/, '');
+      }
     } else if (exploreUrl && exploreUrl !== '#') {
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       document.documentElement.scrollTop = 0;
@@ -69,8 +74,8 @@ export const EcosystemCard: React.FC<EcosystemCardProps> = ({
       style={{
         width: cardWidth,
         height: cardHeight,
-        minWidth: isMobile ? '0' : cardWidth,
-        maxWidth: isMobile ? '324px' : cardWidth,
+        minWidth: cardWidth,
+        maxWidth: cardWidth,
         minHeight: cardHeight,
         maxHeight: cardHeight,
         flexShrink: 0,
@@ -79,8 +84,8 @@ export const EcosystemCard: React.FC<EcosystemCardProps> = ({
         transform: isVisible
           ? 'translate(0, 0)'
           : isMobile
-          ? 'translateY(40px)'
-          : 'translateX(-80px)',
+            ? 'translateY(40px)'
+            : 'translateX(-80px)',
         opacity: isMobile ? (isVisible ? 1 : 0) : 1,
         transition: isVisible
           ? `transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) ${entranceDelay}s, opacity 0.85s ease ${entranceDelay}s`
@@ -100,10 +105,12 @@ export const EcosystemCard: React.FC<EcosystemCardProps> = ({
           overflow: 'hidden',
           userSelect: 'none',
           cursor: 'pointer',
-          boxShadow: isDescriptionActive
-            ? '0 24px 48px rgba(0,0,0,0.36)'
-            : '0 8px 30px rgba(0,0,0,0.12)',
-          transform: isDescriptionActive ? 'translateY(-6px)' : 'translateY(0)',
+          boxShadow: isMobile
+            ? '0 8px 30px rgba(0,0,0,0.18)'
+            : isDescriptionActive
+              ? '0 24px 48px rgba(0,0,0,0.36)'
+              : '0 8px 30px rgba(0,0,0,0.12)',
+          transform: !isMobile && isDescriptionActive ? 'translateY(-6px)' : 'translateY(0)',
           transition:
             'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease',
         }}
@@ -118,226 +125,323 @@ export const EcosystemCard: React.FC<EcosystemCardProps> = ({
             top: 0,
             left: 0,
             objectFit: 'cover',
-            transform: isDescriptionActive ? 'scale(1.05)' : 'scale(1)',
+            transform: !isMobile && isDescriptionActive ? 'scale(1.05)' : 'scale(1)',
             transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
             pointerEvents: 'none',
           }}
           draggable={false}
         />
 
-        <div
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            width: '100%',
-            height: isMobile ? '291px' : '370px',
-            borderRadius: `0 0 ${isMobile ? '20px' : borderRadius} ${isMobile ? '20px' : borderRadius}`,
-            background:
-              'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.49) 100%)',
-            backdropFilter: 'blur(11.75px)',
-            WebkitBackdropFilter: 'blur(11.75px)',
-            WebkitMaskImage: 'linear-gradient(180deg, transparent 0%, black 100%)',
-            maskImage: 'linear-gradient(180deg, transparent 0%, black 100%)',
-            pointerEvents: 'none',
-            zIndex: 1,
-          }}
-        />
-
-        <a
-          href={exploreUrl}
-          onClick={(e) => {
-            if (exploreUrl === '#') {
-              e.preventDefault();
-            } else {
-              window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-              document.documentElement.scrollTop = 0;
-              document.body.scrollTop = 0;
-            }
-            e.stopPropagation();
-          }}
-          style={{
-            position: 'absolute',
-            top: isMobile ? '18px' : '21px',
-            right: isMobile ? '18px' : '21px',
-            height: isMobile ? '48px' : '64px',
-            width: isDescriptionActive
-              ? isMobile
-                ? '145px'
-                : '221px'
-              : isMobile
-              ? '48px'
-              : '64px',
-            borderRadius: isDescriptionActive ? '74px' : '50%',
-            backgroundColor: '#c5422b',
-            boxShadow: isDescriptionActive
-              ? '0px 10px 43.3px 0px rgba(0,0,0,0.2)'
-              : '0px 4px 20px 0px rgba(0,0,0,0.15)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: isDescriptionActive ? 'space-between' : 'center',
-            padding: isDescriptionActive
-              ? isMobile
-                ? '0 16px 0 20px'
-                : '0 24px 0 28px'
-              : '0',
-            textDecoration: 'none',
-            zIndex: 10,
-            overflow: 'hidden',
-            boxSizing: 'border-box',
-            transition:
-              'width 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.4s ease, box-shadow 0.4s ease, padding 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-          }}
-        >
-          <span
-            style={{
-              fontFamily: "'Montserrat', sans-serif",
-              fontSize: isMobile ? '16px' : '20px',
-              fontWeight: 600,
-              color: '#ffffff',
-              whiteSpace: 'nowrap',
-              letterSpacing: '-0.5px',
-              opacity: isDescriptionActive ? 1 : 0,
-              width: isDescriptionActive ? 'auto' : 0,
-              overflow: 'hidden',
-              transform: isDescriptionActive ? 'translateX(0)' : 'translateX(-20px)',
-              transition:
-                'opacity 0.3s ease 0.08s, transform 0.35s ease 0.08s, width 0.35s ease',
-            }}
-          >
-            Explore
-          </span>
-
-          <div
-            style={{
-              width: isMobile ? '24px' : '32px',
-              height: isMobile ? '19px' : '26px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0,
-              transform: isDescriptionActive ? 'rotate(-45deg)' : 'rotate(0deg)',
-              transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-            }}
-          >
-            <img
-              src={arrowRightSvg}
-              alt=""
-              style={{
-                width: isMobile ? '24px' : '32px',
-                height: isMobile ? '19px' : '26px',
-                display: 'block',
-              }}
-              draggable={false}
-            />
-          </div>
-        </a>
-
-        <div
-          style={{
-            position: 'absolute',
-            bottom: isMobile ? '24px' : '28px',
-            left: isMobile ? '20px' : '28px',
-            right: isMobile ? '20px' : '28px',
-            display: 'flex',
-            flexDirection: 'column',
-            zIndex: 2,
-            opacity: isDescriptionActive ? 0 : 1,
-            transform: isDescriptionActive ? 'translateY(160px)' : 'translateY(0)',
-            transition:
-              'opacity 0.3s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
-            pointerEvents: 'none',
-          }}
-        >
-          {pointers && pointers.length > 0 && (
+        {isMobile ? (
+          <>
+            {/* Mobile Rectangle 308 blur gradient overlay */}
             <div
               style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '6px',
-                marginBottom: isMobile ? '18px' : '24px',
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                width: '100%',
+                height: '175px',
+                borderRadius: '0 0 20px 20px',
+                background:
+                  'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.49) 40%)',
+                backdropFilter: 'blur(3.75px)',
+                WebkitBackdropFilter: 'blur(3.75px)',
+                pointerEvents: 'none',
+                zIndex: 1,
+              }}
+            />
+
+            {/* Mobile Title right-aligned */}
+            <div
+              style={{
+                position: 'absolute',
+                top: '250px',
+                right: '21px',
+                textAlign: 'right',
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: '42px',
+                fontWeight: 600,
+                lineHeight: 1.1,
+                letterSpacing: '-1.5px',
+                color: '#fff9f0',
+                margin: 0,
+                whiteSpace: 'nowrap',
+                zIndex: 2,
+                pointerEvents: 'none',
               }}
             >
-              {pointers.map((pointer, i) => (
+              {title}
+            </div>
+
+            {/* Mobile Orange Explore Button */}
+            <a
+              href={exploreUrl}
+              onClick={(e) => {
+                if (exploreUrl === '#') {
+                  e.preventDefault();
+                } else {
+                  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+                  document.documentElement.scrollTop = 0;
+                  document.body.scrollTop = 0;
+                }
+              }}
+              style={{
+                position: 'absolute',
+                top: '360px',
+                right: '22px',
+                width: '137px',
+                height: '43px',
+                borderRadius: '74px',
+                backgroundColor: '#c5422b',
+                boxShadow: '0px 10px 43.3px 0px rgba(0, 0, 0, 0.2)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '12px',
+                textDecoration: 'none',
+                zIndex: 10,
+                boxSizing: 'border-box',
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontSize: '16px',
+                  fontWeight: 500,
+                  color: '#ffffff',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                Explore
+              </span>
+              <svg
+                width="22"
+                height="18"
+                viewBox="0 0 24 19"
+                fill="none"
+                style={{
+                  display: 'block',
+                  transform: 'rotate(-41deg)',
+                  flexShrink: 0,
+                }}
+              >
+                <path
+                  d="M0.75 9.25H22.25M14.75 17.75L22.25 9.25L13.75 0.75"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </a>
+          </>
+        ) : (
+          <>
+            <div
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                width: '100%',
+                height: '370px',
+                borderRadius: `0 0 ${borderRadius} ${borderRadius}`,
+                background:
+                  'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.49) 100%)',
+                backdropFilter: 'blur(11.75px)',
+                WebkitBackdropFilter: 'blur(11.75px)',
+                WebkitMaskImage: 'linear-gradient(180deg, transparent 0%, black 100%)',
+                maskImage: 'linear-gradient(180deg, transparent 0%, black 100%)',
+                pointerEvents: 'none',
+                zIndex: 1,
+              }}
+            />
+
+            <a
+              href={exploreUrl}
+              onClick={(e) => {
+                if (exploreUrl === '#') {
+                  e.preventDefault();
+                } else {
+                  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+                  document.documentElement.scrollTop = 0;
+                  document.body.scrollTop = 0;
+                }
+                e.stopPropagation();
+              }}
+              style={{
+                position: 'absolute',
+                top: '21px',
+                right: '21px',
+                height: '64px',
+                width: isDescriptionActive ? '221px' : '64px',
+                borderRadius: isDescriptionActive ? '74px' : '50%',
+                backgroundColor: '#c5422b',
+                boxShadow: isDescriptionActive
+                  ? '0px 10px 43.3px 0px rgba(0,0,0,0.2)'
+                  : '0px 4px 20px 0px rgba(0,0,0,0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: isDescriptionActive ? 'space-between' : 'center',
+                padding: isDescriptionActive ? '0 24px 0 28px' : '0',
+                textDecoration: 'none',
+                zIndex: 10,
+                overflow: 'hidden',
+                boxSizing: 'border-box',
+                transition:
+                  'width 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.4s ease, box-shadow 0.4s ease, padding 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontSize: '20px',
+                  fontWeight: 600,
+                  color: '#ffffff',
+                  whiteSpace: 'nowrap',
+                  letterSpacing: '-0.5px',
+                  opacity: isDescriptionActive ? 1 : 0,
+                  width: isDescriptionActive ? 'auto' : 0,
+                  overflow: 'hidden',
+                  transform: isDescriptionActive ? 'translateX(0)' : 'translateX(-20px)',
+                  transition:
+                    'opacity 0.3s ease 0.08s, transform 0.35s ease 0.08s, width 0.35s ease',
+                }}
+              >
+                Explore
+              </span>
+
+              <div
+                style={{
+                  width: '32px',
+                  height: '26px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                  transform: isDescriptionActive ? 'rotate(-45deg)' : 'rotate(0deg)',
+                  transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                }}
+              >
+                <img
+                  src={arrowRightSvg}
+                  alt=""
+                  style={{
+                    width: '32px',
+                    height: '26px',
+                    display: 'block',
+                  }}
+                  draggable={false}
+                />
+              </div>
+            </a>
+
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '28px',
+                left: '28px',
+                right: '28px',
+                display: 'flex',
+                flexDirection: 'column',
+                zIndex: 2,
+                opacity: isDescriptionActive ? 0 : 1,
+                transform: isDescriptionActive ? 'translateY(160px)' : 'translateY(0)',
+                transition:
+                  'opacity 0.3s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
+                pointerEvents: 'none',
+              }}
+            >
+              {pointers && pointers.length > 0 && (
                 <div
-                  key={i}
                   style={{
                     display: 'flex',
-                    alignItems: 'center',
-                    gap: '10px',
+                    flexDirection: 'column',
+                    gap: '6px',
+                    marginBottom: '24px',
                   }}
                 >
-                  <div
-                    style={{
-                      width: '6px',
-                      height: '6px',
-                      borderRadius: '50%',
-                      backgroundColor: '#ffffff',
-                      flexShrink: 0,
-                    }}
-                  />
-                  <span
-                    style={{
-                      fontFamily: "'Montserrat', sans-serif",
-                      fontSize: '16px',
-                      fontWeight: 600,
-                      lineHeight: '24px',
-                      letterSpacing: '-0.24px',
-                      color: '#ffffff',
-                      whiteSpace: 'nowrap',
-                      textTransform: 'capitalize',
-                    }}
-                  >
-                    {pointer}
-                  </span>
+                  {pointers.map((pointer, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '10px',
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: '6px',
+                          height: '6px',
+                          borderRadius: '50%',
+                          backgroundColor: '#ffffff',
+                          flexShrink: 0,
+                        }}
+                      />
+                      <span
+                        style={{
+                          fontFamily: "'Montserrat', sans-serif",
+                          fontSize: '16px',
+                          fontWeight: 600,
+                          lineHeight: '24px',
+                          letterSpacing: '-0.24px',
+                          color: '#ffffff',
+                          whiteSpace: 'nowrap',
+                          textTransform: 'capitalize',
+                        }}
+                      >
+                        {pointer}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              )}
+
+              <div
+                style={{
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontSize: '42px',
+                  fontWeight: 600,
+                  lineHeight: 1.1,
+                  letterSpacing: '-1.5px',
+                  color: '#fff9f0',
+                  margin: 0,
+                }}
+              >
+                {title}
+              </div>
             </div>
-          )}
 
-          <div
-            style={{
-              fontFamily: "'Montserrat', sans-serif",
-              fontSize: isMobile ? '36px' : '42px',
-              fontWeight: 600,
-              lineHeight: 1.1,
-              letterSpacing: '-1.5px',
-              color: '#fff9f0',
-              margin: 0,
-            }}
-          >
-            {title}
-          </div>
-        </div>
-
-        <div
-          style={{
-            position: 'absolute',
-            bottom: isMobile ? '24px' : '31px',
-            left: isMobile ? '20px' : '28px',
-            right: isMobile ? '20px' : '28px',
-            zIndex: 3,
-            opacity: isDescriptionActive ? 1 : 0,
-            transform: isDescriptionActive ? 'translateY(0)' : 'translateY(60px)',
-            transition:
-              'opacity 0.4s ease 0.05s, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.05s',
-            pointerEvents: 'none',
-          }}
-        >
-          <div
-            style={{
-              fontFamily: "'Montserrat', sans-serif",
-              fontSize: isMobile ? '20px' : '22px',
-              fontWeight: 500,
-              lineHeight: 1.1,
-              letterSpacing: '-1.5px',
-              color: '#ffffff',
-              margin: 0,
-            }}
-          >
-            {description}
-          </div>
-        </div>
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '31px',
+                left: '28px',
+                right: '28px',
+                zIndex: 3,
+                opacity: isDescriptionActive ? 1 : 0,
+                transform: isDescriptionActive ? 'translateY(0)' : 'translateY(60px)',
+                transition:
+                  'opacity 0.4s ease 0.05s, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.05s',
+                pointerEvents: 'none',
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontSize: '22px',
+                  fontWeight: 500,
+                  lineHeight: 1.1,
+                  letterSpacing: '-1.5px',
+                  color: '#ffffff',
+                  margin: 0,
+                }}
+              >
+                {description}
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

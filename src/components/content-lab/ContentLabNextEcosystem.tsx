@@ -92,11 +92,12 @@ export const ContentLabNextEcosystem: React.FC<ContentLabNextEcosystemProps> = (
           onClick={handleExplore}
           className="btn btn-primary"
           style={{
-            width: isMobile ? '156px' : '231px',
-            height: isMobile ? '38px' : '49px',
+            width: '198px',
+            maxWidth: '100%',
+            height: '47px',
             borderRadius: '74px',
             fontFamily: "'Montserrat', sans-serif",
-            fontSize: isMobile ? '16px' : '18px',
+            fontSize: isMobile ? '15px' : '16px',
             fontWeight: 600,
             cursor: 'pointer',
             display: 'flex',
@@ -106,6 +107,7 @@ export const ContentLabNextEcosystem: React.FC<ContentLabNextEcosystemProps> = (
             boxShadow: '0 10px 43.3px rgba(0, 0, 0, 0.2)',
             transition: 'transform 0.25s ease, box-shadow 0.25s ease',
             flexShrink: 0,
+            boxSizing: 'border-box',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px)';

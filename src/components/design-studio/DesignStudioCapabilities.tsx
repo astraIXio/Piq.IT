@@ -18,6 +18,8 @@ interface DesignStudioCapabilityCardProps {
   frontTitle: React.ReactNode;
   frontTopIcon?: string;
   frontImagePosition?: string;
+  frontImageScale?: number;
+  frontImageOrigin?: string;
   backTitle: React.ReactNode;
   backDescription: string;
   backIcon: string;
@@ -33,6 +35,8 @@ const DesignStudioCapabilityCard: React.FC<DesignStudioCapabilityCardProps> = ({
   frontTitle,
   frontTopIcon,
   frontImagePosition = 'center center',
+  frontImageScale = 1,
+  frontImageOrigin = 'center center',
   backTitle,
   backDescription,
   backIcon,
@@ -136,7 +140,8 @@ const DesignStudioCapabilityCard: React.FC<DesignStudioCapabilityCardProps> = ({
             height: '100%',
             objectFit: 'cover',
             objectPosition: frontImagePosition,
-            transform: isActive ? 'scale(1.06)' : 'scale(1)',
+            transform: `scale(${(isActive ? 1.06 : 1) * frontImageScale})`,
+            transformOrigin: frontImageOrigin,
             transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
             pointerEvents: 'none',
           }}
@@ -226,6 +231,7 @@ const DesignStudioCapabilityCard: React.FC<DesignStudioCapabilityCardProps> = ({
             inset: 0,
             backgroundColor: '#fff9f0',
             borderRadius: '20px',
+            overflow: 'hidden',
             opacity: isActive ? 1 : 0,
             transition: 'opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
             zIndex: 2,
@@ -237,30 +243,35 @@ const DesignStudioCapabilityCard: React.FC<DesignStudioCapabilityCardProps> = ({
             pointerEvents: 'none',
           }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+          {backPattern && (
+            <img
+              src={backPattern}
+              alt=""
+              style={{
+                position: 'absolute',
+                top: 0,
+                right: 0,
+                width: '180px',
+                height: '85px',
+                objectFit: 'contain',
+                objectPosition: 'top right',
+                opacity: isActive ? 0.95 : 0.65,
+                transform: isActive ? 'scale(1.05)' : 'scale(1)',
+                transformOrigin: 'top right',
+                transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease',
+                pointerEvents: 'none',
+              }}
+              draggable={false}
+            />
+          )}
+
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', position: 'relative', zIndex: 3 }}>
             <img
               src={backIcon}
               alt=""
               style={{ width: '55px', height: '55px', objectFit: 'contain' }}
               draggable={false}
             />
-            {backPattern && (
-              <img
-                src={backPattern}
-                alt=""
-                style={{
-                  width: '160px',
-                  height: '65px',
-                  objectFit: 'contain',
-                  opacity: isActive ? 0.95 : 0.65,
-                  transform: isActive ? 'scale(1.08)' : 'scale(1)',
-                  transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease',
-                  marginRight: '-10px',
-                  marginTop: '-10px',
-                }}
-                draggable={false}
-              />
-            )}
           </div>
 
           <div style={{ marginTop: 'auto' }}>
@@ -282,7 +293,7 @@ const DesignStudioCapabilityCard: React.FC<DesignStudioCapabilityCardProps> = ({
               style={{
                 fontFamily: "'Montserrat', sans-serif",
                 fontWeight: 400,
-                fontSize: '15px',
+                fontSize: isMobile ? '17px' : '15px',
                 lineHeight: 1.35,
                 letterSpacing: '-0.3px',
                 color: '#492020',
@@ -369,7 +380,7 @@ export const DesignStudioCapabilities: React.FC = () => {
         <h2
           style={{
             fontFamily: "'Montserrat', sans-serif",
-            fontWeight: 700,
+            fontWeight: 600,
             fontSize: isMobile ? '36px' : '60px',
             lineHeight: 1.15,
             letterSpacing: '-2.3321px',
@@ -398,9 +409,11 @@ export const DesignStudioCapabilities: React.FC = () => {
             id="card-trend-intelligence"
             frontImage={imgTrendIntelligence}
             frontImagePosition={isMobile ? '78% center' : '78% center'}
+            frontImageScale={1.12}
+            frontImageOrigin="right center"
             frontTitle="Trend Intelligence"
             backTitle="Trend Intelligence"
-            backDescription="Spotting what’s next to shape for meaningful market ready designs"
+            backDescription="Spotting what’s next to shape for meaningful market-ready designs"
             backIcon={iconTrend}
             isMobile={isMobile}
             isVisible={isVisible}
@@ -424,8 +437,8 @@ export const DesignStudioCapabilities: React.FC = () => {
             id="card-tech-packs"
             frontImage={imgTechPacks}
             frontImagePosition={isMobile ? '67% 20%' : '64% 20%'}
-            frontTitle={isMobile ? 'Tech Pack Synthesis' : 'Tech Packs'}
-            backTitle={isMobile ? 'Tech Pack Synthesis' : 'Tech Pack'}
+            frontTitle="Tech Packs"
+            backTitle="Tech Packs"
             backDescription="Seamless development of clear, detailed, production-ready tech packs"
             backIcon={iconTechPacks}
             isMobile={isMobile}
@@ -437,13 +450,13 @@ export const DesignStudioCapabilities: React.FC = () => {
             id="card-virtual-sampling"
             frontImage={imgVirtualSampling}
             frontImagePosition={isMobile ? '22% center' : '11% center'}
-            frontTitle={isMobile ? 'Design Visualization' : (
+            frontTitle={isMobile ? 'Virtual Sampling' : (
               <>
                 Virtual <br />
                 Sampling
               </>
             )}
-            backTitle={isMobile ? 'Design Visualization' : (
+            backTitle={isMobile ? 'Virtual Sampling' : (
               <>
                 Virtual <br />
                 Sampling

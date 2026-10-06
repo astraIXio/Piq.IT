@@ -74,15 +74,16 @@ export const SourcingHubBanner: React.FC<SourcingHubBannerProps> = ({
         <button
           onClick={handleClick}
           style={{
-            width: isMobile ? '150px' : '162px',
-            height: isMobile ? '44px' : '49px',
+            width: '198px',
+            maxWidth: '100%',
+            height: '49px',
             padding: 0,
             borderRadius: '74px',
             backgroundColor: 'rgba(0, 0, 0, 0.5)',
             border: '1px solid rgba(255, 255, 255, 0.15)',
             color: '#ffffff',
             fontFamily: "'Montserrat', sans-serif",
-            fontSize: isMobile ? '16px' : '18px',
+            fontSize: '18px',
             fontWeight: 600,
             lineHeight: 1,
             cursor: 'pointer',
@@ -95,6 +96,7 @@ export const SourcingHubBanner: React.FC<SourcingHubBannerProps> = ({
               'transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease',
             flexShrink: 0,
             outline: 'none',
+            boxSizing: 'border-box',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)';

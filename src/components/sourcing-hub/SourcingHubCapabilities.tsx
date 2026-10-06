@@ -9,7 +9,7 @@ import { useMobileCardState } from '../../hooks/useMobileScrollActive';
 
 interface SourcingCapabilityCardProps {
   id: string;
-  title: string;
+  title: React.ReactNode;
   description: string;
   image: string;
   pattern: string;
@@ -78,25 +78,6 @@ const SourcingCapabilityCard: React.FC<SourcingCapabilityCardProps> = ({
         flex: 1,
       }}
     >
-      <img
-        src={pattern}
-        alt=""
-        style={{
-          position: 'absolute',
-          top: imagePosition === 'bottom' ? '12px' : 'auto',
-          bottom: imagePosition === 'top' ? '12px' : 'auto',
-          right: '12px',
-          width: '120px',
-          height: '60px',
-          objectFit: 'contain',
-          opacity: isActive ? 0.95 : 0.6,
-          transform: isActive ? 'scale(1.08)' : 'scale(1)',
-          transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease',
-          pointerEvents: 'none',
-        }}
-        draggable={false}
-      />
-
       <h3
         style={{
           fontFamily: "'Montserrat', sans-serif",
@@ -107,7 +88,7 @@ const SourcingCapabilityCard: React.FC<SourcingCapabilityCardProps> = ({
           color: '#492020',
           margin: '0 0 14px 0',
           position: 'relative',
-          zIndex: 3,
+          zIndex: 2,
         }}
       >
         {title}
@@ -123,7 +104,8 @@ const SourcingCapabilityCard: React.FC<SourcingCapabilityCardProps> = ({
           margin: 0,
           opacity: 0.9,
           position: 'relative',
-          zIndex: 3,
+          zIndex: 2,
+          maxWidth: '220px',
         }}
       >
         {description}
@@ -137,14 +119,14 @@ const SourcingCapabilityCard: React.FC<SourcingCapabilityCardProps> = ({
         width: '100%',
         height: isMobile ? '280px' : '290px',
         overflow: 'hidden',
-        borderRadius: '20px',
+        borderRadius: imagePosition === 'top' ? '20px 20px 0 0' : '0 0 20px 20px',
         position: 'relative',
         flexShrink: 0,
       }}
     >
       <img
         src={image}
-        alt={title}
+        alt=""
         style={{
           width: '100%',
           height: '100%',
@@ -205,6 +187,27 @@ const SourcingCapabilityCard: React.FC<SourcingCapabilityCardProps> = ({
           cursor: 'pointer',
         }}
       >
+        <img
+          src={pattern}
+          alt=""
+          style={{
+            position: 'absolute',
+            top: imagePosition === 'bottom' ? '0' : 'auto',
+            bottom: imagePosition === 'top' ? '0' : 'auto',
+            right: '0',
+            width: '120px',
+            height: '80px',
+            objectFit: 'contain',
+            objectPosition: imagePosition === 'bottom' ? 'top right' : 'bottom right',
+            opacity: isActive ? 0.95 : 0.85,
+            zIndex: 1,
+            transform: isActive ? 'scale(1.06)' : 'scale(1)',
+            transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease',
+            pointerEvents: 'none',
+          }}
+          draggable={false}
+        />
+
         {imagePosition === 'top' ? (
           <>
             {imageBlock}
@@ -318,7 +321,13 @@ export const SourcingHubCapabilities: React.FC = () => {
         >
           <SourcingCapabilityCard
             id="card-build-products"
-            title="Build Products"
+            title={
+              <>
+                Build
+                <br />
+                Products
+              </>
+            }
             description="From one tech pack to full seasonal ranges, small batches to large volumes, matched to the right factory"
             image={card1Img}
             pattern={pattern1}
@@ -330,7 +339,13 @@ export const SourcingHubCapabilities: React.FC = () => {
 
           <SourcingCapabilityCard
             id="card-production-management"
-            title="Run Production"
+            title={
+              <>
+                Run
+                <br />
+                Production
+              </>
+            }
             description="We keep manufacturing on time and on budget, with clear costing and capacity planning"
             image={card2Img}
             pattern={pattern2}
@@ -342,9 +357,14 @@ export const SourcingHubCapabilities: React.FC = () => {
 
           <SourcingCapabilityCard
             id="card-quality-assurance"
-            title="Check
-Quality"
-            description="Ispections during and after production to AQL 2.5, with photo proof, so quality stays consistent and every issue is traceable"
+            title={
+              <>
+                Check
+                <br />
+                Quality
+              </>
+            }
+            description="Inspections during and after production to AQL 2.5, with photo proof, so quality stays consistent and every issue is traceable"
             image={card3Img}
             pattern={pattern1}
             imagePosition="bottom"
@@ -355,7 +375,13 @@ Quality"
 
           <SourcingCapabilityCard
             id="card-supplier-network"
-            title="Find Suppliers"
+            title={
+              <>
+                Find
+                <br />
+                Suppliers
+              </>
+            }
             description="Direct access to certified, sustainable textile mills across India, China, Bangladesh, Cambodia and Vietnam. No middlemen"
             image={card4Img}
             pattern={pattern2}

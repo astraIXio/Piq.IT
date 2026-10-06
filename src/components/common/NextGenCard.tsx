@@ -132,6 +132,8 @@ export const NextGenCard: React.FC<NextGenCardProps> = ({
         position: 'relative',
         overflow: 'hidden',
         isolation: 'isolate',
+        backgroundColor: '#110505',
+        WebkitMaskImage: '-webkit-radial-gradient(white, black)',
         userSelect: 'none',
         cursor: 'pointer',
         boxSizing: 'border-box',
@@ -145,7 +147,7 @@ export const NextGenCard: React.FC<NextGenCardProps> = ({
           : isMobile
           ? 'translateY(50px)'
           : 'translateX(-90px)',
-        opacity: isMobile ? (showEntrance ? 1 : 0) : 1,
+        opacity: showEntrance ? 1 : 0,
         transition: showEntrance
           ? `transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${isMobile ? 0.05 : entranceDelay}s, opacity 0.8s ease ${isMobile ? 0.05 : entranceDelay}s, box-shadow 0.4s ease`
           : 'none',
@@ -161,8 +163,6 @@ export const NextGenCard: React.FC<NextGenCardProps> = ({
           position: 'absolute',
           top: 0,
           left: 0,
-          borderRadius,
-          clipPath: `inset(0 round ${borderRadius})`,
           objectFit: 'cover',
           transform: isActive ? 'scale(1.05)' : 'scale(1)',
           transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
@@ -198,12 +198,7 @@ export const NextGenCard: React.FC<NextGenCardProps> = ({
           left: 0,
           width: '100%',
           height: isMobile ? '140px' : '190px',
-          borderRadius: '0 0 20px 20px',
           background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.85) 60%, #000000 100%)',
-          backdropFilter: 'blur(11.75px)',
-          WebkitBackdropFilter: 'blur(11.75px)',
-          WebkitMaskImage: 'linear-gradient(180deg, transparent 0%, black 100%)',
-          maskImage: 'linear-gradient(180deg, transparent 0%, black 100%)',
           opacity: isActive ? 0 : 1,
           transition: 'opacity 0.4s ease',
           zIndex: 1,
@@ -215,8 +210,6 @@ export const NextGenCard: React.FC<NextGenCardProps> = ({
         style={{
           position: 'absolute',
           inset: 0,
-          borderRadius,
-          clipPath: `inset(0 round ${borderRadius})`,
           overflow: 'hidden',
           backgroundColor: '#c5422b',
           opacity: isActive ? 1 : 0,
@@ -260,7 +253,7 @@ export const NextGenCard: React.FC<NextGenCardProps> = ({
         style={{
           position: 'absolute',
           top: isMobile ? (id === 'card-commerce' ? '18px' : '20px') : isActive ? '31px' : '240px',
-          left: isMobile ? '20px' : isActive ? '34px' : '28px',
+          left: isMobile ? '20px' : '28px',
           width: isMobile ? 'calc(100% - 40px)' : '308px',
           fontSize: isMobile ? '26px' : '42px',
           fontWeight: 500,
@@ -270,7 +263,7 @@ export const NextGenCard: React.FC<NextGenCardProps> = ({
           zIndex: 3,
           margin: 0,
           transition:
-            'top 0.48s cubic-bezier(0.16, 1, 0.3, 1), left 0.48s ease, color 0.3s ease',
+            'top 0.48s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease',
           pointerEvents: 'none',
         }}
       >
@@ -287,7 +280,7 @@ export const NextGenCard: React.FC<NextGenCardProps> = ({
           display: 'flex',
           flexDirection: 'column',
           gap: isMobile ? '6px' : '8px',
-          fontSize: isMobile ? '15px' : '20px',
+          fontSize: isMobile ? '17px' : '20px',
           fontWeight: 400,
           lineHeight: isMobile ? 1.3 : 1.2,
           letterSpacing: isMobile ? '-0.4px' : '-1.2px',
@@ -309,10 +302,10 @@ export const NextGenCard: React.FC<NextGenCardProps> = ({
         style={{
           position: 'absolute',
           top: isMobile ? (isActive ? mobileDescriptionTop : '360px') : isActive ? '182px' : '520px',
-          left: isMobile ? '20px' : '34px',
+          left: isMobile ? '20px' : '28px',
           width: isMobile ? 'calc(100% - 40px)' : descriptionWidth,
           maxWidth: isMobile ? '265px' : 'none',
-          fontSize: isMobile ? '15px' : descriptionFontSize,
+          fontSize: isMobile ? '17px' : descriptionFontSize,
           fontWeight: 300,
           lineHeight: isMobile ? 1.38 : 1.25,
           letterSpacing: isMobile ? '-0.3px' : descriptionLetterSpacing,

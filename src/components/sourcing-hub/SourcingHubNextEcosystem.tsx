@@ -92,11 +92,12 @@ export const SourcingHubNextEcosystem: React.FC<SourcingHubNextEcosystemProps> =
           onClick={handleExplore}
           className="btn btn-primary"
           style={{
-            width: isMobile ? '160px' : '231px',
-            height: isMobile ? '42px' : '49px',
+            width: '198px',
+            maxWidth: '100%',
+            height: '47px',
             borderRadius: '50px',
             fontFamily: "'Montserrat', sans-serif",
-            fontSize: isMobile ? '14px' : '16px',
+            fontSize: isMobile ? '15px' : '16px',
             fontWeight: 600,
             cursor: 'pointer',
             display: 'flex',
@@ -106,6 +107,7 @@ export const SourcingHubNextEcosystem: React.FC<SourcingHubNextEcosystemProps> =
             boxShadow: '0 8px 30px rgba(197, 66, 43, 0.35)',
             transition: 'transform 0.25s ease, box-shadow 0.25s ease',
             flexShrink: 0,
+            boxSizing: 'border-box',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px)';

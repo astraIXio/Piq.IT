@@ -74,14 +74,16 @@ export const DesignStudioBanner: React.FC<DesignStudioBannerProps> = ({
         <button
           onClick={handleClick}
           style={{
-            height: isMobile ? '42px' : '49px',
-            padding: isMobile ? '0 28px' : '0 36px',
+            width: '198px',
+            maxWidth: '100%',
+            height: '49px',
+            padding: 0,
             borderRadius: '74px',
             backgroundColor: 'rgba(0, 0, 0, 0.5)',
             border: '1px solid rgba(255, 255, 255, 0.15)',
             color: '#ffffff',
             fontFamily: "'Montserrat', sans-serif",
-            fontSize: isMobile ? '15px' : '16px',
+            fontSize: '18px',
             fontWeight: 600,
             cursor: 'pointer',
             display: 'inline-flex',
@@ -91,6 +93,7 @@ export const DesignStudioBanner: React.FC<DesignStudioBannerProps> = ({
             transition:
               'transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease',
             flexShrink: 0,
+            boxSizing: 'border-box',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)';

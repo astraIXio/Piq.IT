@@ -208,6 +208,8 @@ export const CommerceGridSequence: React.FC = () => {
           <br />
           <span style={{ color: '#c5422b' }}>Unified Commerce</span>
         </h2>
+        <br></br>
+        <br></br>
 
         {!isMobile && (
           <div

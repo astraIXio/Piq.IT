@@ -24,8 +24,8 @@ export const BrandShowcase: React.FC = () => {
         style={{ 
           textAlign: 'center', 
           color: '#492020', 
-          fontSize: '24px', 
-          fontWeight: 600,
+          fontSize: '19px', 
+          fontWeight: 450,
           fontFamily: "'Montserrat', sans-serif",
           margin: '0 0 42px 0'
         }}
