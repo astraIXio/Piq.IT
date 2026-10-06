@@ -43,7 +43,7 @@ export const EcosystemCard: React.FC<EcosystemCardProps> = ({
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const { isActive: isDescriptionActive, toggle: toggleCard } = useMobileCardState(
+  const { isActive: isDescriptionActive } = useMobileCardState(
     cardRef,
     isMobile,
     { isHovered }
