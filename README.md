@@ -78,6 +78,18 @@ The **"Book Consultation"** / **"Get Started"** form includes client-side valida
 
 ---
 
+## Performance, Caching & Load Optimization
+
+To handle high-resolution visual assets and ensure seamless delivery under heavy load capacity , dedicated caching efficiency methods and UX enhancements have been implemented:
+
+- **Immutable CDN & Browser Caching:** Configured long-term caching policies (`Cache-Control: public, max-age=31536000, immutable`) across static assets in `netlify.toml` so returning visitors and repeat navigations load instantly from cache without exhausting network bandwidth.
+- **Brand Experience Preloader:** An animated brand loader is integrated on initial visit, ensuring the site only reveals once the primary hero banner is downloaded and GPU-decoded (`img.decode()`), preventing layout pop-in and elevating perceived UX quality.
+- **Render Deferral (`content-visibility: auto`):** Heavy offscreen sections (including partner brand showcases and visual cards) utilize `content-visibility: auto` with fixed intrinsic reservations, dedicating 100% of initial device compute and bandwidth to the hero viewport without degrading logo quality.
+- **Background Banner Pre-Warming:** Subpage hero graphics are pre-fetched into browser memory during idle cycles, enabling instantaneous zero-latency transitions when switching between platform sections.
+
+---
+
 ## License
 
 Proprietary © PiqIt. All rights reserved.
+

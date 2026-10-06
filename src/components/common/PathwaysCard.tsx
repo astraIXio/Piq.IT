@@ -143,6 +143,8 @@ export const PathwaysCard: React.FC<PathwaysCardProps> = ({
         <img
           src={bgImage}
           alt={tag}
+          loading="lazy"
+          decoding="async"
           style={{
             width: '100%',
             height: '100%',

@@ -118,6 +118,8 @@ export const EcosystemCard: React.FC<EcosystemCardProps> = ({
         <img
           src={bgImage}
           alt=""
+          loading="lazy"
+          decoding="async"
           style={{
             width: '100%',
             height: '100%',

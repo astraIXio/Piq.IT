@@ -291,6 +291,8 @@ export const Footer: React.FC<FooterProps> = ({
           <img
             src={piqitLogoWhite}
             alt="Piqit Logo"
+            loading="lazy"
+            decoding="async"
             style={{
               width: isMobile ? '140px' : '172px',
               height: isMobile ? '70px' : '86px',

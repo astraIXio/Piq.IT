@@ -162,6 +162,8 @@ export const CustomerFeedback: React.FC = () => {
           <img
             src={gapDenimImg}
             alt="GAP Denim"
+            loading="lazy"
+            decoding="async"
             style={{
               width: '100%',
               height: '100%',
@@ -207,6 +209,8 @@ export const CustomerFeedback: React.FC = () => {
             <img
               src={johnPlayersImg}
               alt="John Players"
+              loading="lazy"
+              decoding="async"
               style={{
                 width: '100%',
                 maxHeight: '42px',
@@ -229,6 +233,8 @@ export const CustomerFeedback: React.FC = () => {
             <img
               src={leeCooperImg}
               alt="Lee Cooper"
+              loading="lazy"
+              decoding="async"
               style={{
                 width: '100%',
                 height: '100%',
@@ -260,6 +266,8 @@ export const CustomerFeedback: React.FC = () => {
           <img
             src={peterEnglandModelImg}
             alt="Peter England Model"
+            loading="lazy"
+            decoding="async"
             style={{
               width: '100%',
               height: '100%',
@@ -284,6 +292,8 @@ export const CustomerFeedback: React.FC = () => {
             <img
               src={peterEnglandWordmarkImg}
               alt="Peter England"
+              loading="lazy"
+              decoding="async"
               style={{
                 width: '100%',
                 height: '100%',
@@ -322,6 +332,8 @@ export const CustomerFeedback: React.FC = () => {
             <img
               src={tommyHilfigerImg}
               alt="Tommy Hilfiger"
+              loading="lazy"
+              decoding="async"
               style={{
                 width: '100%',
                 height: '100%',
@@ -344,6 +356,8 @@ export const CustomerFeedback: React.FC = () => {
             <img
               src={calvinKleinImg}
               alt="Calvin Klein"
+              loading="lazy"
+              decoding="async"
               style={{
                 width: '100%',
                 height: '100%',
@@ -380,6 +394,8 @@ export const CustomerFeedback: React.FC = () => {
           <img
             src={peterEnglandModelImg}
             alt="Peter England"
+            loading="lazy"
+            decoding="async"
             style={{
               width: '100%',
               height: '100%',
@@ -403,6 +419,8 @@ export const CustomerFeedback: React.FC = () => {
             <img
               src={peterEnglandWordmarkImg}
               alt="Peter England"
+              loading="lazy"
+              decoding="async"
               style={{ width: '100%', height: '100%', objectFit: 'contain' }}
             />
           </div>
@@ -424,6 +442,8 @@ export const CustomerFeedback: React.FC = () => {
           <img
             src={gapDenimImg}
             alt="GAP"
+            loading="lazy"
+            decoding="async"
             style={{
               width: '100%',
               height: '100%',
@@ -452,6 +472,8 @@ export const CustomerFeedback: React.FC = () => {
             <img
               src={tommyHilfigerImg}
               alt="Tommy Hilfiger"
+              loading="lazy"
+              decoding="async"
               style={{
                 width: '100%',
                 height: '100%',
@@ -473,6 +495,8 @@ export const CustomerFeedback: React.FC = () => {
             <img
               src={calvinKleinImg}
               alt="Calvin Klein"
+              loading="lazy"
+              decoding="async"
               style={{
                 width: '100%',
                 height: '100%',
@@ -506,6 +530,8 @@ export const CustomerFeedback: React.FC = () => {
             <img
               src={johnPlayersImg}
               alt="John Players"
+              loading="lazy"
+              decoding="async"
               style={{
                 width: '100%',
                 maxHeight: '32px',
@@ -527,6 +553,8 @@ export const CustomerFeedback: React.FC = () => {
             <img
               src={leeCooperImg}
               alt="Lee Cooper"
+              loading="lazy"
+              decoding="async"
               style={{
                 width: '100%',
                 height: '100%',
@@ -556,6 +584,8 @@ export const CustomerFeedback: React.FC = () => {
         position: 'relative',
         width: '100%',
         boxSizing: 'border-box',
+        contentVisibility: 'auto',
+        containIntrinsicSize: isMobile ? '800px' : '650px',
       }}
     >
       <div

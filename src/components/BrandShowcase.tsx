@@ -17,7 +17,9 @@ export const BrandShowcase: React.FC = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        contentVisibility: 'auto',
+        containIntrinsicSize: '352px'
       }}
     >
       <h2 
@@ -68,6 +70,8 @@ export const BrandShowcase: React.FC = () => {
               <img 
                 src={logo} 
                 alt={`Brand Logo ${index}`} 
+                loading="lazy"
+                decoding="async"
                 style={{ 
                   width: '100%',
                   height: '100%',

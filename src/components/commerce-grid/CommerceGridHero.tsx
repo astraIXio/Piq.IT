@@ -63,6 +63,8 @@ export const CommerceGridHero: React.FC<CommerceGridHeroProps> = ({
       <img
         src={isMobile ? heroBgMobile : heroBgDesktop}
         alt="Commerce Grid Hero - Model in car driving by the coast with smartphone commerce UI"
+        fetchPriority="high"
+        decoding="sync"
         style={{
           position: 'absolute',
           top: 0,

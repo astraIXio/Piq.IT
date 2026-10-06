@@ -82,6 +82,8 @@ export const DesignStudioHero: React.FC<DesignStudioHeroProps> = ({
         <img
           src={heroBg}
           alt="Modern Fashion Design Studio"
+          fetchPriority="high"
+          decoding="sync"
           style={{
             width: '100%',
             height: '100%',

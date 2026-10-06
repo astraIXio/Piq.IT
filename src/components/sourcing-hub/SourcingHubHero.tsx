@@ -82,6 +82,8 @@ export const SourcingHubHero: React.FC<SourcingHubHeroProps> = ({
         <img
           src={heroBg}
           alt="Sourcing Hub - Minimalist Modern Wardrobe Display"
+          fetchPriority="high"
+          decoding="sync"
           style={{
             width: '100%',
             height: '100%',

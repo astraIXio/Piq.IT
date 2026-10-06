@@ -8,10 +8,16 @@ import { ConnectedEcosystem } from './components/ConnectedEcosystem';
 import { CustomerFeedback } from './components/CustomerFeedback';
 import { BookConsultation } from './components/BookConsultation';
 import { Footer } from './components/Footer';
+import { Preloader } from './components/Preloader';
 import { DesignStudioPage } from './components/design-studio';
 import { SourcingHubPage } from './components/sourcing-hub';
 import { ContentLabPage } from './components/content-lab';
 import { CommerceGridPage } from './components/commerce-grid';
+
+import dsHero from './assets/design-studio-hero.png';
+import shHero from './assets/sourcing-hub-hero.png';
+import clHero from './assets/content-lab-hero.png';
+import cgHero from './assets/commerce-grid-hero.png';
 
 type Page = 'home' | 'design-studio' | 'sourcing-hub' | 'content-lab' | 'commerce-grid';
 
@@ -104,8 +110,20 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    // Silently preheat the 4 subpage hero banners in browser memory after homepage initial paint
+    const timer = setTimeout(() => {
+      [dsHero, shHero, clHero, cgHero].forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
+    }, 1800);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="app-container">
+      {currentPage === 'home' && <Preloader />}
       {currentPage === 'home' ? (
         <main>
           <Hero onTabClick={handleNavigate} />

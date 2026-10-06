@@ -55,6 +55,8 @@ export const Hero: React.FC<HeroProps> = ({ onTabClick }) => {
       <img
         src={heroBg}
         alt=""
+        fetchPriority="high"
+        decoding="sync"
         style={{
           position: 'absolute',
           top: 0,

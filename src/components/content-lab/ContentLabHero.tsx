@@ -83,6 +83,8 @@ export const ContentLabHero: React.FC<ContentLabHeroProps> = ({
         <img
           src={isMobile ? heroBgMobile : heroBgDesktop}
           alt="Content Lab - ⁠Content That Moves Commerce"
+          fetchPriority="high"
+          decoding="sync"
           style={{
             width: '100%',
             height: '100%',
