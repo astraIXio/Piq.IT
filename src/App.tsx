@@ -110,6 +110,17 @@ function App() {
     }
   };
 
+  const [visitedPages, setVisitedPages] = useState<Set<Page>>(() => new Set(['home', currentPage]));
+
+  useEffect(() => {
+    setVisitedPages((prev) => {
+      if (prev.has(currentPage)) return prev;
+      const next = new Set(prev);
+      next.add(currentPage);
+      return next;
+    });
+  }, [currentPage]);
+
   useEffect(() => {
     // Silently preheat the 4 subpage hero banners in browser memory after homepage initial paint
     const timer = setTimeout(() => {
@@ -123,8 +134,10 @@ function App() {
 
   return (
     <div className="app-container">
-      {currentPage === 'home' && <Preloader />}
-      {currentPage === 'home' ? (
+      <Preloader />
+
+      {/* Home fold - persistent in DOM */}
+      <div style={{ display: currentPage === 'home' ? 'block' : 'none' }}>
         <main>
           <Hero onTabClick={handleNavigate} />
           <BrandShowcase />
@@ -135,14 +148,34 @@ function App() {
           <BookConsultation />
           <Footer onTabClick={handleNavigate} />
         </main>
-      ) : currentPage === 'design-studio' ? (
-        <DesignStudioPage onNavigate={handleNavigate} />
-      ) : currentPage === 'sourcing-hub' ? (
-        <SourcingHubPage onNavigate={handleNavigate} />
-      ) : currentPage === 'content-lab' ? (
-        <ContentLabPage onNavigate={handleNavigate} />
-      ) : (
-        <CommerceGridPage onNavigate={handleNavigate} />
+      </div>
+
+      {/* Design Studio - kept in DOM once visited */}
+      {visitedPages.has('design-studio') && (
+        <div style={{ display: currentPage === 'design-studio' ? 'block' : 'none' }}>
+          <DesignStudioPage onNavigate={handleNavigate} />
+        </div>
+      )}
+
+      {/* Sourcing Hub - kept in DOM once visited */}
+      {visitedPages.has('sourcing-hub') && (
+        <div style={{ display: currentPage === 'sourcing-hub' ? 'block' : 'none' }}>
+          <SourcingHubPage onNavigate={handleNavigate} />
+        </div>
+      )}
+
+      {/* Content Lab - kept in DOM once visited */}
+      {visitedPages.has('content-lab') && (
+        <div style={{ display: currentPage === 'content-lab' ? 'block' : 'none' }}>
+          <ContentLabPage onNavigate={handleNavigate} />
+        </div>
+      )}
+
+      {/* Commerce Grid - kept in DOM once visited */}
+      {visitedPages.has('commerce-grid') && (
+        <div style={{ display: currentPage === 'commerce-grid' ? 'block' : 'none' }}>
+          <CommerceGridPage onNavigate={handleNavigate} />
+        </div>
       )}
     </div>
   );

@@ -7,15 +7,18 @@ export interface PreloaderProps {
 }
 
 export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
+  const [isDone, setIsDone] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return !!sessionStorage.getItem('piqit_intro_shown');
+    }
+    return false;
+  });
   const [isReady, setIsReady] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
-  const [isDone, setIsDone] = useState(false);
 
   useEffect(() => {
-    // Check if already shown in this session
-    const hasLoaded = sessionStorage.getItem('piqit_intro_shown');
-    if (hasLoaded) {
-      setIsDone(true);
+    // If already completed, nothing to do
+    if (isDone) {
       onComplete?.();
       return;
     }
