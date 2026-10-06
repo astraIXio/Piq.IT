@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import heroBg from '../assets/hero-bg.png';
+import heroBgWebp from '../assets/hero-bg.webp';
+import heroBgPng from '../assets/hero-bg.png';
 import { Navbar } from './Navbar';
 
 export interface HeroProps {
@@ -52,24 +53,27 @@ export const Hero: React.FC<HeroProps> = ({ onTabClick }) => {
         overflow: 'hidden',
       }}
     >
-      <img
-        src={heroBg}
-        alt=""
-        fetchPriority="high"
-        decoding="sync"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: isMobile ? 'calc(50% - 60px)' : 'calc(50% - 160px)',
-          transform: 'translateX(-50%)',
-          width: isMobile ? '1468px' : 'max(1658px, calc(100% + 300px))',
-          height: '100.63%',
-          maxWidth: 'none',
-          objectFit: 'cover',
-          objectPosition: 'center top',
-          pointerEvents: 'none',
-        }}
-      />
+      <picture>
+        <source type="image/webp" srcSet={heroBgWebp} />
+        <img
+          src={heroBgPng}
+          alt=""
+          fetchPriority="high"
+          decoding="sync"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: isMobile ? 'calc(50% - 60px)' : 'calc(50% - 160px)',
+            transform: 'translateX(-50%)',
+            width: isMobile ? '1468px' : 'max(1658px, calc(100% + 300px))',
+            height: '100.63%',
+            maxWidth: 'none',
+            objectFit: 'cover',
+            objectPosition: 'center top',
+            pointerEvents: 'none',
+          }}
+        />
+      </picture>
 
       <div
         style={{

@@ -14,10 +14,10 @@ import { SourcingHubPage } from './components/sourcing-hub';
 import { ContentLabPage } from './components/content-lab';
 import { CommerceGridPage } from './components/commerce-grid';
 
-import dsHero from './assets/design-studio-hero.png';
-import shHero from './assets/sourcing-hub-hero.png';
-import clHero from './assets/content-lab-hero.png';
-import cgHero from './assets/commerce-grid-hero.png';
+import dsHero from './assets/design-studio-hero.webp';
+import shHero from './assets/sourcing-hub-hero.webp';
+import clHero from './assets/content-lab-hero.webp';
+import cgHero from './assets/commerce-grid-hero.webp';
 
 type Page = 'home' | 'design-studio' | 'sourcing-hub' | 'content-lab' | 'commerce-grid';
 

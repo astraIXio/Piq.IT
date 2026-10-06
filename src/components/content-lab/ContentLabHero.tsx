@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import heroBgDesktop from '../../assets/content-lab-hero.png';
-import heroBgMobile from '../../assets/content-lab-hero-mobile.png';
+import heroBgDesktopWebp from '../../assets/content-lab-hero.webp';
+import heroBgDesktopPng from '../../assets/content-lab-hero.png';
+import heroBgMobileWebp from '../../assets/content-lab-hero-mobile.webp';
+import heroBgMobilePng from '../../assets/content-lab-hero-mobile.png';
 import { Navbar } from '../Navbar';
 
 export interface ContentLabHeroProps {
@@ -12,6 +14,7 @@ export const ContentLabHero: React.FC<ContentLabHeroProps> = ({
   onNavigate,
   onConsultationClick,
 }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -80,20 +83,51 @@ export const ContentLabHero: React.FC<ContentLabHeroProps> = ({
           overflow: 'hidden',
         }}
       >
-        <img
-          src={isMobile ? heroBgMobile : heroBgDesktop}
-          alt="Content Lab - ⁠Content That Moves Commerce"
-          fetchPriority="high"
-          decoding="sync"
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            objectPosition: 'center center',
-            transform: isLoaded ? 'scale(1)' : 'scale(1.05)',
-            transition: 'transform 1.4s cubic-bezier(0.16, 1, 0.3, 1)',
-          }}
-        />
+        {!imageLoaded && (
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: '#050202',
+              zIndex: 2,
+            }}
+          >
+            <div
+              style={{
+                width: '36px',
+                height: '36px',
+                borderRadius: '50%',
+                border: '3px solid rgba(197, 66, 43, 0.2)',
+                borderTopColor: '#c5422b',
+                animation: 'spin 0.7s linear infinite',
+              }}
+            />
+          </div>
+        )}
+        <picture>
+          <source
+            type="image/webp"
+            srcSet={isMobile ? heroBgMobileWebp : heroBgDesktopWebp}
+          />
+          <img
+            src={isMobile ? heroBgMobilePng : heroBgDesktopPng}
+            alt="Content Lab - ⁠Content That Moves Commerce"
+            fetchPriority="high"
+            decoding="sync"
+            onLoad={() => setImageLoaded(true)}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center center',
+              opacity: imageLoaded ? 1 : 0,
+              transition: 'opacity 0.4s ease-out',
+            }}
+          />
+        </picture>
       </div>
 
       <div

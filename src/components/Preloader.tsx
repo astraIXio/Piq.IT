@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import piqitLogoWhite from '../assets/piqit-logo-white.png';
-import heroBg from '../assets/hero-bg.png';
+import heroBg from '../assets/hero-bg.webp';
 
 export interface PreloaderProps {
   onComplete?: () => void;

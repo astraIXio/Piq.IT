@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import heroBg from '../../assets/sourcing-hub-hero.png';
+import heroBgWebp from '../../assets/sourcing-hub-hero.webp';
+import heroBgPng from '../../assets/sourcing-hub-hero.png';
 import { Navbar } from '../Navbar';
 
 export interface SourcingHubHeroProps {
@@ -11,6 +12,7 @@ export const SourcingHubHero: React.FC<SourcingHubHeroProps> = ({
   onNavigate,
   onConsultationClick,
 }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -79,20 +81,48 @@ export const SourcingHubHero: React.FC<SourcingHubHeroProps> = ({
           overflow: 'hidden',
         }}
       >
-        <img
-          src={heroBg}
-          alt="Sourcing Hub - Minimalist Modern Wardrobe Display"
-          fetchPriority="high"
-          decoding="sync"
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            objectPosition: isMobile ? '67% center' : 'center center',
-            transform: isLoaded ? 'scale(1)' : 'scale(1.05)',
-            transition: 'transform 1.4s cubic-bezier(0.16, 1, 0.3, 1)',
-          }}
-        />
+        {!imageLoaded && (
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: '#050202',
+              zIndex: 2,
+            }}
+          >
+            <div
+              style={{
+                width: '36px',
+                height: '36px',
+                borderRadius: '50%',
+                border: '3px solid rgba(197, 66, 43, 0.2)',
+                borderTopColor: '#c5422b',
+                animation: 'spin 0.7s linear infinite',
+              }}
+            />
+          </div>
+        )}
+        <picture>
+          <source type="image/webp" srcSet={heroBgWebp} />
+          <img
+            src={heroBgPng}
+            alt="Sourcing Hub - Minimalist Modern Wardrobe Display"
+            fetchPriority="high"
+            decoding="sync"
+            onLoad={() => setImageLoaded(true)}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: isMobile ? '67% center' : 'center center',
+              opacity: imageLoaded ? 1 : 0,
+              transition: 'opacity 0.4s ease-out',
+            }}
+          />
+        </picture>
       </div>
 
       <div
